@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  demo-db:
+    container_name: demo-db
+    image: postgres
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo
+    ports:
+      - '5445:5432'
+    volumes:
+      - demo-db-vol:/var/lib/postgresql/data
+
+  demo-redis:
+    image: 'redis:3.2.6'
+    container_name: demo-redis
+    ports:
+      - '6395:6379'
+    volumes:
+      - './.redis_data:/data'
+
+volumes:
+  demo-db-vol: {}

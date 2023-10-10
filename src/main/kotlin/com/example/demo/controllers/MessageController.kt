@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.util.UUID
 
 @RestController
 @RequestMapping("/message")
@@ -27,7 +28,7 @@ class MessageController(val service: IMessageService) {
     }
 
     @GetMapping("/{id}")
-    fun findMessageById(@PathVariable id: String): ResponseEntity<Message> {
+    fun findMessageById(@PathVariable id: UUID): ResponseEntity<Message> {
         val startTime = getStartTime()
 
         val message = service.findMessageById(id)
@@ -50,7 +51,7 @@ class MessageController(val service: IMessageService) {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun updateMessage(@PathVariable id: String, @RequestBody message: Message) {
+    fun updateMessage(@PathVariable id: UUID, @RequestBody message: Message) {
         try {
             val startTime = getStartTime()
 
@@ -63,7 +64,7 @@ class MessageController(val service: IMessageService) {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteMessage(@PathVariable id: String) {
+    fun deleteMessage(@PathVariable id: UUID) {
         try {
             val startTime = getStartTime()
 

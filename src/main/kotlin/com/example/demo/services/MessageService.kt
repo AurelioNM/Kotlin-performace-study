@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import java.util.UUID
 
 
 @Service
@@ -18,7 +19,7 @@ class MessageService(val repository: MessageRepository): IMessageService {
         return repository.findMessages()
     }
 
-    override fun findMessageById(id: String): Message? {
+    override fun findMessageById(id: UUID): Message? {
         logger.info("getting message by id: $id")
         return repository.findMessageById(id)
     }
@@ -28,13 +29,13 @@ class MessageService(val repository: MessageRepository): IMessageService {
         repository.saveMessage(message)
     }
 
-    override fun updateMessage(id: String, text: String) {
+    override fun updateMessage(id: UUID, text: String) {
         logger.info("updating message $id with text: $text")
         val wasMessageUpdated = repository.updateMessage(id, text)
         if (!wasMessageUpdated) throw ResponseStatusException(HttpStatus.NOT_FOUND, "Message does not exist")
     }
 
-    override fun deleteMessage(id: String) {
+    override fun deleteMessage(id: UUID) {
         logger.info("deleting message: $id")
         val wasMessageDeleted = repository.deleteMessage(id)
         if (!wasMessageDeleted) throw ResponseStatusException(HttpStatus.NOT_FOUND, "Message does not exist")
