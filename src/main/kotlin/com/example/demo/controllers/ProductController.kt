@@ -1,39 +1,40 @@
 package com.example.demo.controllers
 
-import com.example.demo.models.Message
-import com.example.demo.services.messages.IMessageService
+import com.example.demo.models.Product
+import com.example.demo.services.products.IProductService
 import com.example.demo.util.calcExecutionTime
 import com.example.demo.util.getStartTime
+import jakarta.websocket.MessageHandler.Partial
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
-import java.util.UUID
+import java.util.*
 
 @RestController
-@RequestMapping("/message")
-class MessageController(val service: IMessageService) {
+@RequestMapping("/product")
+class ProductController(val service: IProductService) {
 
     private val logger = LoggerFactory.getLogger(javaClass.name)
 
     @GetMapping()
-    fun findMessages(): ResponseEntity<List<Message>> {
+    fun findProducts(): ResponseEntity<List<Product>> {
         val startTime = getStartTime()
 
-        val messages = service.findMessages()
+        val products = service.findProducts()
 
         calcExecutionTime(startTime)
-        return ResponseEntity.ok(messages)
+        return ResponseEntity.ok(products)
     }
 
     @GetMapping("/{id}")
-    fun findMessageById(@PathVariable id: UUID): ResponseEntity<Message> {
+    fun findProductById(@PathVariable id: UUID): ResponseEntity<Product> {
         val startTime = getStartTime()
 
-        val message = service.findMessageById(id)
-        val res: ResponseEntity<Message> =
-            if (message != null) ResponseEntity.ok(message)
+        val product = service.findProductById(id)
+        val res: ResponseEntity<Product> =
+            if (product != null) ResponseEntity.ok(product)
             else ResponseEntity(HttpStatus.NOT_FOUND)
 
         calcExecutionTime(startTime)
@@ -42,33 +43,20 @@ class MessageController(val service: IMessageService) {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveMessage(@RequestBody message: Message) {
+    fun saveProduct(@RequestBody product: Product) {
         val startTime = getStartTime()
 
-        service.saveMessage(message)
+        service.saveProduct(product)
         calcExecutionTime(startTime)
-    }
-
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    fun updateMessage(@PathVariable id: UUID, @RequestBody message: Message) {
-        try {
-            val startTime = getStartTime()
-
-            service.updateMessage(id, message.text)
-            calcExecutionTime(startTime)
-        } catch (e: ResponseStatusException) {
-            throw e
-        }
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteMessage(@PathVariable id: UUID) {
+    fun deleteProduct(@PathVariable id: UUID) {
         try {
             val startTime = getStartTime()
 
-            service.deleteMessage(id)
+            service.deleteProduct(id)
             calcExecutionTime(startTime)
         } catch (e: ResponseStatusException) {
             throw e

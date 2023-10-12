@@ -1,4 +1,4 @@
-package com.example.demo.repositories
+package com.example.demo.repositories.messages
 
 import com.example.demo.models.Message
 import org.springframework.jdbc.core.JdbcTemplate

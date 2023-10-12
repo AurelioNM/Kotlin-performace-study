@@ -1,12 +1,12 @@
-package com.example.demo.services
+package com.example.demo.services.messages
 
 import com.example.demo.models.Message
-import com.example.demo.repositories.MessageRepository
+import com.example.demo.repositories.messages.MessageRepository
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
-import java.util.UUID
+import java.util.*
 
 
 @Service

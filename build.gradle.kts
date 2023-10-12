@@ -37,6 +37,9 @@ dependencies {
 	implementation("org.postgresql:postgresql")
 	implementation("org.flywaydb:flyway-core") // Use a compatible Flyway version
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.5.1")
 }
 
 tasks.withType<KotlinCompile> {

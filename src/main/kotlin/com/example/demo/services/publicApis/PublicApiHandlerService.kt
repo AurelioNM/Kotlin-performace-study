@@ -1,4 +1,4 @@
-package com.example.demo.services.publicApi
+package com.example.demo.services.publicApis
 
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
 @Service
-class ApiDataLoaderService {
+class PublicApiHandlerService {
 
     private val logger = LoggerFactory.getLogger(javaClass.name)
     private val restTemplate = RestTemplate()

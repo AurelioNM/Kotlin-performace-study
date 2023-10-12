@@ -1,4 +1,4 @@
-package com.example.demo.services
+package com.example.demo.services.messages
 
 import com.example.demo.models.Message
 import java.util.UUID
