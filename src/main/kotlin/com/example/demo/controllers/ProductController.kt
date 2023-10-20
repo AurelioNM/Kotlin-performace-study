@@ -1,10 +1,9 @@
 package com.example.demo.controllers
 
 import com.example.demo.models.Product
-import com.example.demo.services.products.IProductService
+import com.example.demo.services.products.ProductService
 import com.example.demo.util.calcExecutionTime
 import com.example.demo.util.getStartTime
-import jakarta.websocket.MessageHandler.Partial
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,9 +13,16 @@ import java.util.*
 
 @RestController
 @RequestMapping("/product")
-class ProductController(val service: IProductService) {
+class ProductController(val service: ProductService) {
 
     private val logger = LoggerFactory.getLogger(javaClass.name)
+
+    @GetMapping("/test-get")
+    fun test() {
+        val startTime = getStartTime()
+        service.checkIfCurrencyCacheExists()
+        calcExecutionTime(startTime)
+    }
 
     @GetMapping()
     fun findProducts(): ResponseEntity<List<Product>> {

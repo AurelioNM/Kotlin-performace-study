@@ -40,6 +40,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.5.1")
+	implementation("redis.clients:jedis:3.7.0")
 }
 
 tasks.withType<KotlinCompile> {

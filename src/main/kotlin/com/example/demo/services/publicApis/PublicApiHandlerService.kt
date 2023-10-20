@@ -19,6 +19,6 @@ class PublicApiHandlerService {
     fun <T> buildResponseEntity(response: T?): ResponseEntity<T> {
         return response?.let {
             ResponseEntity.ok(it)
-        } ?: ResponseEntity.notFound().build()
+        } ?: ResponseEntity.noContent().build()
     }
 }
